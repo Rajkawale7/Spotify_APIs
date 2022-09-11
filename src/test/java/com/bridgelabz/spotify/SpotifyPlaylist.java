@@ -2,6 +2,7 @@ package com.bridgelabz.spotify;
 
 import org.testng.annotations.Test;
 import io.restassured.*;
+import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,7 +13,7 @@ public class SpotifyPlaylist {
 	 */
 	
 	String uri = "https://api.spotify.com/v1";
-	String token = "Bearer BQCGlPwCjV9iEG6aQru4iV1vFTx6SS4tCoNUQjjWuBYnO6JqbCMxTHs4sDtBJKNlY8aqLDnz-ILkmqVSkMkScN0242OS6v6rkRXqhu4sEQGfU0YMp0jaXsBE4QBf7ZpelV4ejdCBYSgm05_nBk3r-X5ABz-tjoc1OS2e-QVc1Qsdjdr2PdNida3JpQ8eyGYJ_rzkmIQtIGkm";
+	String token = "Bearer BQD_X-DfKNbohNwDqbeaCXP7MC3InW5R2o8w7W8mJDYcx0CVum4fnPs6PtMD1RP-ZRtwaglYUWw7BX3JEuX_EPfu78vrtLkEQeKYsgvTuML6t1d912EKOAAlNcVCOAaccg_B7gqb82YcMMljbPUl5MRGlLCeBO08PG9eGVhl6-DWwFJefsuoCM2ZAfatGurMsuOsJ3XX5X4xhuI";
 	
 	@Test
 	public void CreatePlaylist() {
@@ -55,4 +56,16 @@ public class SpotifyPlaylist {
 		System.out.println("The response Time has taken : " + response1.getTime());
 		System.out.println("________________________________________________________________");
 	}
+	
+	@Test
+    public void addItemsToPlaylist() {
+        Response response2 = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", token)
+                .get(uri + "/playlists/1e8xIRPe0z9Lq3zi22G63t/tracks?uris=spotify:track:6EtKlIQmGPB9SX8UjDJG5s");
+        
+        System.out.println("Current User's Playlists: " + response2.prettyPrint());
+        System.out.println("The result of status code is : " + response2.getStatusCode());
+		System.out.println("The response Time has taken : " + response2.getTime());
+		System.out.println("________________________________________________________________");    }
 }
