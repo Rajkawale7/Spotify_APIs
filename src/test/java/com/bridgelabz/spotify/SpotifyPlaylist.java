@@ -42,4 +42,17 @@ public class SpotifyPlaylist {
 	System.out.println("The Result of Creating playlist is: " + response.asPrettyString());
 	System.out.println("________________________________________________________________");
 	}
+
+	@Test
+	public void getPlaylist() {
+		RestAssured.baseURI = uri;
+		RequestSpecification httpRequest = RestAssured.given().baseUri(uri);
+		
+		Response response1 = RestAssured.given().header("Authorization", token).get(uri + "/users/kp3h8vi2tcgpixazjqzqsurj6/playlists");
+		
+		System.out.println("Current User's Playlists: " + response1.asPrettyString());
+		System.out.println("The result of status code is : " + response1.getStatusCode());
+		System.out.println("The response Time has taken : " + response1.getTime());
+		System.out.println("________________________________________________________________");
+	}
 }
